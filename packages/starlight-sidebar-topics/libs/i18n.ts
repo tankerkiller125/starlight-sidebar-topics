@@ -51,10 +51,10 @@ export function getTranslation(
 
 /**
  * Resolves a translation from either an object notation or a string with separate translations property.
- * 
+ *
  * Supports two syntaxes:
  * 1. Object notation: { en: 'English', es: 'Spanish' }
- * 2. String with translations: value='English', translations={ es: 'Spanish' }
+ * 2. String with translations: value = 'English', translations = { es: 'Spanish' }
  */
 export function resolveTranslation(
   currentLocale: APIContext['currentLocale'],
@@ -84,5 +84,6 @@ export function resolveTranslation(
     return getTranslation(currentLocale, translationsMap, link, description)
   }
 
-  return value
+  // This should never be reached but TypeScript requires a return
+  return String(value)
 }
