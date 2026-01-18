@@ -6,7 +6,7 @@ const sidebarTopicBadgeSchema = z.object({
   variant: z.enum(['note', 'danger', 'success', 'caution', 'tip', 'default']).default('default'),
   /**
    * Translations for the badge text in different locales.
-   * 
+   *
    * Use this property to provide translations when the default language is specified in the `text` property.
    * The keys must be BCP-47 tags (e.g. es, fr, or zh-CN) for each locale you want to translate.
    */
@@ -45,11 +45,11 @@ const sidebarTopicBaseSchema = z.object({
   link: z.string(),
   /**
    * Translations for the topic label in different locales.
-   * 
+   *
    * Use this property to provide translations when the default language is specified in the `label` property.
    * The keys must be BCP-47 tags (e.g. es, fr, or zh-CN) for each locale you want to translate.
    * This follows the same pattern as regular Starlight sidebar items.
-   * 
+   *
    * @example
    * {
    *   label: 'Getting Started',

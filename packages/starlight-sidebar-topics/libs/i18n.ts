@@ -71,9 +71,10 @@ export function resolveTranslation(
     }
 
     // Create a translations map with the string value as default and merge with translations
+    // Note: translations should not contain the default language key to avoid overriding
     const translationsMap: Record<string, string> = {
-      [defaultLang]: value,
       ...translations,
+      [defaultLang]: value,
     }
 
     return getTranslation(currentLocale, translationsMap, link, description)
