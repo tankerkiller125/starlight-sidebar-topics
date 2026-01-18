@@ -7,7 +7,7 @@ export class DemoPage extends BasePage {
     super(page)
   }
 
-  goto(pathname?: string) {
-    return this.page.goto(`/demo${pathname ?? ''}`)
+  goto(pathname?: string, locale?: string) {
+    return this.page.goto(`${locale ? `/${locale}` : ''}/demo${pathname ?? ''}`)
   }
 }
