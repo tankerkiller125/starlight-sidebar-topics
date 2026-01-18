@@ -4,6 +4,13 @@ import { z } from 'astro/zod'
 const sidebarTopicBadgeSchema = z.object({
   text: z.union([z.string(), z.record(z.string())]),
   variant: z.enum(['note', 'danger', 'success', 'caution', 'tip', 'default']).default('default'),
+  /**
+   * Translations for the badge text in different locales.
+   *
+   * Use this property to provide translations when the default language is specified in the `text` property.
+   * The keys must be BCP-47 tags (e.g. es, fr, or zh-CN) for each locale you want to translate.
+   */
+  translations: z.record(z.string()).optional(),
 })
 
 const sidebarTopicBaseSchema = z.object({
@@ -36,6 +43,20 @@ const sidebarTopicBaseSchema = z.object({
    * topic’s landing page.
    */
   link: z.string(),
+  /**
+   * Translations for the topic label in different locales.
+   *
+   * Use this property to provide translations when the default language is specified in the `label` property.
+   * The keys must be BCP-47 tags (e.g. es, fr, or zh-CN) for each locale you want to translate.
+   * This follows the same pattern as regular Starlight sidebar items.
+   *
+   * @example
+   * {
+   *   label: 'Getting Started',
+   *   translations: { es: 'Guía de Iniciación', fr: 'Commencer' }
+   * }
+   */
+  translations: z.record(z.string()).optional(),
 })
 
 const sidebarTopicLinkSchema = sidebarTopicBaseSchema
