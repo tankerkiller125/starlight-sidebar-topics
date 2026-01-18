@@ -42,8 +42,8 @@ export default defineConfig({
             },
             {
               id: 'demo',
-              label: {
-                en: 'Demo',
+              label: 'Demo',
+              translations: {
                 fr: 'Démo',
               },
               link: '/demo/',
@@ -54,8 +54,8 @@ export default defineConfig({
                 { label: 'Commands', autogenerate: { directory: 'demo/commands' }, collapsed: true },
               ],
               badge: {
-                text: {
-                  en: 'Stub',
+                text: 'Stub',
+                translations: {
                   fr: 'Ébauche',
                 },
                 variant: 'caution',

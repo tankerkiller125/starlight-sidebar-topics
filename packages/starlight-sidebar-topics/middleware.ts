@@ -6,7 +6,7 @@ import config from 'virtual:starlight-sidebar-topics/config'
 import options from 'virtual:starlight-sidebar-topics/options'
 
 import type { StarlightSidebarTopicsRouteData } from './data'
-import { getTranslation } from './libs/i18n'
+import { resolveTranslation } from './libs/i18n'
 import { ensureLeadingSlash } from './libs/pathname'
 import { throwPluginError } from './libs/plugin'
 import { getCurrentTopic, getTopicById, isTopicFirstPage, isTopicLastPage, type Topic } from './libs/sidebar'
@@ -79,25 +79,24 @@ function getRouteData(
           isLinkTopic || !currentTopic
             ? false
             : topic.label === currentTopic.config.label && topic.link === currentTopic.config.link,
-        label:
-          typeof topic.label === 'string'
-            ? topic.label
-            : getTranslation(currentLocale, topic.label, topic.link, 'topic label'),
+        label: resolveTranslation(currentLocale, topic.label, topic.translations, topic.link, 'topic label'),
         link: !isLinkTopic && currentLocale ? getRelativeLocaleUrl(currentLocale, topic.link) : topic.link,
       }
 
       if (topic.badge) {
         topicRouteData.badge = {
-          text:
-            typeof topic.badge.text === 'string'
-              ? topic.badge.text
-              : getTranslation(currentLocale, topic.badge.text, topic.link, 'topic badge text'),
+          text: resolveTranslation(
+            currentLocale,
+            topic.badge.text,
+            topic.badge.translations,
+            topic.link,
+            'topic badge text',
+          ),
           variant: topic.badge.variant,
         }
       }
 
       if (topic.icon) {
-        // @ts-expect-error - Icon configuration is not typed.
         topicRouteData.icon = topic.icon
       }
 

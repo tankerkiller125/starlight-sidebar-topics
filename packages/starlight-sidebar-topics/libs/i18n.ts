@@ -48,3 +48,41 @@ export function getTranslation(
 
   return translation
 }
+
+/**
+ * Resolves a translation from either an object notation or a string with separate translations property.
+ * 
+ * Supports two syntaxes:
+ * 1. Object notation: { en: 'English', es: 'Spanish' }
+ * 2. String with translations: value='English', translations={ es: 'Spanish' }
+ */
+export function resolveTranslation(
+  currentLocale: APIContext['currentLocale'],
+  value: string | Record<string, string>,
+  translations: Record<string, string> | undefined,
+  link: string,
+  description: string,
+): string {
+  // If value is an object (old syntax), use it directly
+  if (typeof value === 'object') {
+    return getTranslation(currentLocale, value, link, description)
+  }
+
+  // If value is a string and translations are provided, combine them
+  if (typeof value === 'string') {
+    // If no translations property is provided, return the string value
+    if (!translations) {
+      return value
+    }
+
+    // Create a translations map with the string value as default and merge with translations
+    const translationsMap: Record<string, string> = {
+      [defaultLang]: value,
+      ...translations,
+    }
+
+    return getTranslation(currentLocale, translationsMap, link, description)
+  }
+
+  return value
+}
