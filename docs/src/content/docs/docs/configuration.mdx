@@ -88,6 +88,20 @@ starlightSidebarTopics([
 ])
 ```
 
+Alternatively, you can use a string for the default language and provide translations using the [`translations`](#translations) property:
+
+```js {3-6}
+starlightSidebarTopics([
+  {
+    label: 'Starlight documentation',
+    translations: {
+      fr: 'Documentation de Starlight',
+    },
+    link: 'https://starlight.astro.build',
+  },
+])
+```
+
 ### `link`
 
 **required**  
@@ -204,6 +218,54 @@ starlightSidebarTopics([
   },
 ])
 ```
+
+Alternatively, you can use a string for the default language and provide translations using the `badge.translations` property:
+
+```js {6-10}
+starlightSidebarTopics([
+  {
+    label: 'Starlight docs',
+    link: 'https://starlight.astro.build',
+    badge: {
+      text: 'Official',
+      translations: {
+        fr: 'Officiel',
+      },
+      variant: 'success',
+    },
+  },
+])
+```
+
+### `translations`
+
+**type:** `Record<string, string>`
+
+Translations for the topic label in different locales.
+
+This property provides an alternative way to specify translations for multilingual sites.
+Use this when you want to specify the default language text in the [`label`](#label) property and provide translations for other locales.
+The keys must be BCP-47 tags (e.g. `es`, `fr`, or `zh-CN`):
+
+```js {4-6}
+starlightSidebarTopics([
+  {
+    label: 'Getting Started',
+    translations: {
+      es: 'Guía de Iniciación',
+      fr: 'Commencer',
+    },
+    link: '/guides/getting-started/',
+    items: [{ label: 'Introduction', slug: 'guides/intro' }],
+  },
+])
+```
+
+This follows the same pattern as regular Starlight sidebar items, making it easier to maintain consistent translation approaches across your documentation.
+
+:::tip
+Both the object notation (`label: { en: '...', fr: '...' }`) and the `translations` property (`label: '...', translations: { fr: '...' }`) are supported. Choose the approach that best fits your project's needs.
+:::
 
 ## Plugin configuration
 
