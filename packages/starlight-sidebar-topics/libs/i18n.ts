@@ -63,11 +63,6 @@ export function resolveTranslation(
   link: string,
   description: string,
 ): string {
-  // If value is an object (old syntax), use it directly
-  if (typeof value === 'object') {
-    return getTranslation(currentLocale, value, link, description)
-  }
-
   // If value is a string and translations are provided, combine them
   if (typeof value === 'string') {
     // If no translations property is provided, return the string value
@@ -82,6 +77,11 @@ export function resolveTranslation(
     }
 
     return getTranslation(currentLocale, translationsMap, link, description)
+  }
+
+  // If value is an object (old syntax), use it directly
+  if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+    return getTranslation(currentLocale, value, link, description)
   }
 
   // This should never be reached but TypeScript requires a return
